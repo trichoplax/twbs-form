@@ -5,7 +5,7 @@ window.onload = function() {
     document.getElementById("not_required_min_10_max_25").addEventListener("change", validateNotRequiredMin10Max25);
     document.getElementById("letters_only").addEventListener("change", validateLettersOnly);
     document.getElementById("required_conditionally").addEventListener("change", validateRequiredConditionally);
-    document.getElementById("on_submit").addEventListener("change", validateOnSubmit);
+    window.addEventListener("submit", validateOnSubmit);
     document.getElementById("valid_email").addEventListener("change", validateEmail);
 };
 
@@ -104,8 +104,27 @@ function validateRequiredConditionally() {
     return true;
 }
 
-function validateOnSubmit() {
-
+function validateOnSubmit(event) {
+    let message = document.getElementById("on_submit_warning");
+    let valid = true;
+    let validationResults = [];
+    validationResults.push(validateRequiredField());
+    validationResults.push(validateMaxLength8());
+    validationResults.push(validateRequiredMin10Max25());
+    validationResults.push(validateNotRequiredMin10Max25());
+    validationResults.push(validateLettersOnly());
+    validationResults.push(validateRequiredConditionally());
+    validationResults.push(validateEmail());
+    for (let i = 0; i < validationResults.length; i++) {
+        valid = valid && validationResults[i];
+    }
+    if (!valid) {
+        message.textContent = "This form cannot be submitted until all warnings are resolved.";
+        event.preventDefault();
+        return false;   // This prevents the form from being submitted.
+    }
+    message.textContent = "";
+    return true;
 }
 
 function validateEmail() {
