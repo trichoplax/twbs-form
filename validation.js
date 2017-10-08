@@ -15,10 +15,9 @@ function validateRequiredField() {
     if (content.length === 0) {
         message.textContent = "This field must not be empty.";
         return false;
-    } else {
-        message.textContent = "";
-        return true;
     }
+    message.textContent = "";
+    return true;
 }
 
 function validateMaxLength8() {
@@ -27,14 +26,28 @@ function validateMaxLength8() {
     if (content.length > 8) {
         message.textContent = "This field must not have more than 8 characters (including spaces).";
         return false;
-    } else {
-        message.textContent = "";
-        return true;
     }
+    message.textContent = "";
+    return true;
 }
 
 function validateRequiredMin10Max25() {
-
+    var content = document.getElementById("required_min_10_max_25").value;
+    var message = document.getElementById("required_min_10_max_25_warning");
+    if (content.length === 0) {
+        message.textContent = "This field must not be empty.";
+        return false;
+    }
+    if (content.length < 10) {
+        message.textContent = "This field must have at least 10 characters (including spaces).";
+        return false;
+    }
+    if (content.length > 25) {
+        message.textContent = "This field must not have more than 25 characters (including spaces).";
+        return false;
+    }
+    message.textContent = "";
+    return true;
 }
 
 function validateNotRequiredMin10Max25() {
