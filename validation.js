@@ -93,7 +93,15 @@ function validateLettersOnly() {
 }
 
 function validateRequiredConditionally() {
-
+    let content = document.getElementById("required_conditionally").value;
+    let message = document.getElementById("required_conditionally_warning");
+    let required = document.getElementById("yes").checked;
+    if (content.length === 0 && required) {
+        message.textContent = "This field must not be empty when the radio button 'Yes' is selected.";
+        return false;
+    }
+    message.textContent = "";
+    return true;
 }
 
 function validateOnSubmit() {
