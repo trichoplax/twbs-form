@@ -10,7 +10,15 @@ window.onload = function() {
 }
 
 function validateRequiredField() {
-
+    var content = document.getElementById("required_field").value;
+    var message = document.getElementById("required_field_warning");
+    if (content.length === 0) {
+        message.textContent = "This field must not be empty.";
+        return false;
+    } else {
+        message.textContent = "";
+        return true;
+    }
 }
 
 function validateMaxLength8() {
