@@ -7,11 +7,11 @@ window.onload = function() {
     document.getElementById("required_conditionally").addEventListener("change", validateRequiredConditionally);
     document.getElementById("on_submit").addEventListener("change", validateOnSubmit);
     document.getElementById("valid_email").addEventListener("change", validateEmail);
-}
+};
 
 function validateRequiredField() {
-    var content = document.getElementById("required_field").value;
-    var message = document.getElementById("required_field_warning");
+    let content = document.getElementById("required_field").value;
+    let message = document.getElementById("required_field_warning");
     if (content.length === 0) {
         message.textContent = "This field must not be empty.";
         return false;
@@ -21,8 +21,8 @@ function validateRequiredField() {
 }
 
 function validateMaxLength8() {
-    var content = document.getElementById("max_length_8").value;
-    var message = document.getElementById("max_length_8_warning");
+    let content = document.getElementById("max_length_8").value;
+    let message = document.getElementById("max_length_8_warning");
     if (content.length > 8) {
         message.textContent = "This field must not have more than 8 characters (including spaces).";
         return false;
@@ -32,8 +32,8 @@ function validateMaxLength8() {
 }
 
 function validateRequiredMin10Max25() {
-    var content = document.getElementById("required_min_10_max_25").value;
-    var message = document.getElementById("required_min_10_max_25_warning");
+    let content = document.getElementById("required_min_10_max_25").value;
+    let message = document.getElementById("required_min_10_max_25_warning");
     if (content.length === 0) {
         message.textContent = "This field must not be empty.";
         return false;
@@ -51,8 +51,8 @@ function validateRequiredMin10Max25() {
 }
 
 function validateNotRequiredMin10Max25() {
-    var content = document.getElementById("not_required_min_10_max_25").value;
-    var message = document.getElementById("not_required_min_10_max_25_warning");
+    let content = document.getElementById("not_required_min_10_max_25").value;
+    let message = document.getElementById("not_required_min_10_max_25_warning");
     if (content.length === 0) {
         message.textContent = "";
         return true;
@@ -70,7 +70,26 @@ function validateNotRequiredMin10Max25() {
 }
 
 function validateLettersOnly() {
-
+    let content = document.getElementById("letters_only").value;
+    let message = document.getElementById("letters_only_warning");
+    let nonLetters = [];
+    for (let i = 0; i < content.length; i++) {
+        let character = content.charAt(i);
+        if (character.toLowerCase() === character.toUpperCase()) {    // Thanks to https://stackoverflow.com/a/32567789/3344075
+            nonLetters.push(character);
+        }
+    }
+    if (nonLetters.length > 1) {
+        message.textContent = "These are not considered letters here: '";
+        message.textContent += nonLetters.join("', '") + "'";
+        return false;
+    }
+    if (nonLetters.length === 1) {
+        message.textContent = "This is not considered a letter here: '" + nonLetters[0] + "'";
+        return false;
+    }
+    message.textContent = "";
+    return true;
 }
 
 function validateRequiredConditionally() {
