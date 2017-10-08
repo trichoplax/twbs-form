@@ -22,7 +22,15 @@ function validateRequiredField() {
 }
 
 function validateMaxLength8() {
-
+    var content = document.getElementById("max_length_8").value;
+    var message = document.getElementById("max_length_8_warning");
+    if (content.length > 8) {
+        message.textContent = "This field must not have more than 8 characters (including spaces).";
+        return false;
+    } else {
+        message.textContent = "";
+        return true;
+    }
 }
 
 function validateRequiredMin10Max25() {
