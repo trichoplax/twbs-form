@@ -51,7 +51,22 @@ function validateRequiredMin10Max25() {
 }
 
 function validateNotRequiredMin10Max25() {
-
+    var content = document.getElementById("not_required_min_10_max_25").value;
+    var message = document.getElementById("not_required_min_10_max_25_warning");
+    if (content.length === 0) {
+        message.textContent = "";
+        return true;
+    }
+    if (content.length < 10) {
+        message.textContent = "This field must have at least 10 characters (including spaces).";
+        return false;
+    }
+    if (content.length > 25) {
+        message.textContent = "This field must not have more than 25 characters (including spaces).";
+        return false;
+    }
+    message.textContent = "";
+    return true;
 }
 
 function validateLettersOnly() {
