@@ -109,6 +109,17 @@ function validateOnSubmit() {
 }
 
 function validateEmail() {
+    let content = document.getElementById("valid_email").value;
+    let message = document.getElementById("valid_email_warning");
+    if (content.length > 0 && !isValidEmail(content)) {
+        message.textContent = "If filled, this field must contain a valid email address.";
+        return false;
+    }
+    message.textContent = "";
+    return true;
+}
 
+function isValidEmail(text) {
+    return true;
 }
 
