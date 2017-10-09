@@ -107,17 +107,13 @@ function validateRequiredConditionally() {
 function validateOnSubmit(event) {
     let message = document.getElementById("on_submit_warning");
     let valid = true;
-    let validationResults = [];
-    validationResults.push(validateRequiredField());
-    validationResults.push(validateMaxLength8());
-    validationResults.push(validateRequiredMin10Max25());
-    validationResults.push(validateNotRequiredMin10Max25());
-    validationResults.push(validateLettersOnly());
-    validationResults.push(validateRequiredConditionally());
-    validationResults.push(validateEmail());
-    for (let i = 0; i < validationResults.length; i++) {
-        valid = valid && validationResults[i];
-    }
+    valid = valid && validateRequiredField();
+    valid = valid && validateMaxLength8();
+    valid = valid && validateRequiredMin10Max25();
+    valid = valid && validateNotRequiredMin10Max25();
+    valid = valid && validateLettersOnly();
+    valid = valid && validateRequiredConditionally();
+    valid = valid && validateEmail();
     if (!valid) {
         message.textContent = "This form cannot be submitted until all warnings are resolved.";
         event.preventDefault();
