@@ -6,7 +6,6 @@ window.onload = function() {
     document.getElementById("letters_only").addEventListener("change", validateLettersOnly)
     document.getElementById("required_conditionally").addEventListener("change", validateRequiredConditionally)
     window.addEventListener("submit", validateOnSubmit)
-    document.getElementById("valid_email").addEventListener("change", validateEmail)
 }
 
 function validateRequiredField() {
@@ -107,13 +106,12 @@ function validateRequiredConditionally() {
 function validateOnSubmit(event) {
     let message = document.getElementById("on_submit_warning")
     let valid = true
-    valid = valid && validateRequiredField()
-    valid = valid && validateMaxLength8()
-    valid = valid && validateRequiredMin10Max25()
-    valid = valid && validateNotRequiredMin10Max25()
-    valid = valid && validateLettersOnly()
-    valid = valid && validateRequiredConditionally()
-    valid = valid && validateEmail()
+    valid = validateRequiredField() && valid
+    valid = validateMaxLength8() && valid
+    valid = validateRequiredMin10Max25() && valid
+    valid = validateNotRequiredMin10Max25() && valid
+    valid = validateLettersOnly() && valid
+    valid = validateRequiredConditionally() && valid
     if (!valid) {
         message.textContent = "This form cannot be submitted until all warnings are resolved."
         event.preventDefault()
@@ -123,18 +121,4 @@ function validateOnSubmit(event) {
     return true;
 }
 
-function validateEmail() {
-    let content = document.getElementById("valid_email").value
-    let message = document.getElementById("valid_email_warning")
-    if (content.length > 0 && !isValidEmail(content)) {
-        message.textContent = "If filled, this field must contain a valid email address."
-        return false
-    }
-    message.textContent = ""
-    return true;
-}
-
-function isValidEmail(text) {
-    return true
-}
 
